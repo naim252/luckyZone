@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>luckyZone</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: #000 url('https://i.ibb.co/KyNYgdg/bg-casino.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+    }
+    .wheel-container {
+      margin-top: 50px;
+    }
+    .wheel {
+      width: 300px;
+      height: 300px;
+      border: 10px solid #fff;
+      border-radius: 50%;
+      margin: 0 auto;
+      background: conic-gradient(
+        red 0deg 45deg,
+        orange 45deg 90deg,
+        yellow 90deg 135deg,
+        green 135deg 180deg,
+        blue 180deg 225deg,
+        indigo 225deg 270deg,
+        violet 270deg 315deg,
+        pink 315deg 360deg
+      );
+      position: relative;
+      transition: transform 4s ease-out;
+    }
+    .wheel:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid #fff;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .spin-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #holdon {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    #holdon .popup {
+      background: #1a1aef;
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      font-size: 20px;
+      max-width: 300px;
+    }
+    .redirecting {
+      font-size: 40px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Welcome to luckyZone 🎉</h1>
+  <div class="wheel-container">
+    <div id="wheel" class="wheel"></div>
+    <button class="spin-btn" onclick="spinWheel()">স্পিন করুন</button>
+  </div>
+
+  <div id="holdon">
+    <div class="popup">
+      <div class="redirecting">⏳ হোল্ড অন!</div>
+      <div>তোমার রিওয়ার্ড পেতে <span id="countdown">30</span> সেকেন্ড অপেক্ষা করো...</div>
+    </div>
+  </div>
+
+  <script>
+    let spinning = false;
+
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+
+      const wheel = document.getElementById('wheel');
+      const spinDeg = Math.floor(3600 + Math.random() * 1000);
+      wheel.style.transform = `rotate(${spinDeg}deg)`;
+
+      setTimeout(() => {
+        document.getElementById('holdon').style.display = 'flex';
+        startCountdown(30);
+      }, 4000);
+    }
+
+    function startCountdown(seconds) {
+      const countdownEl = document.getElementById('countdown');
+      let timeLeft = seconds;
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        countdownEl.innerText = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          window.location.href = 'https://broker-qx.pro/sign-up/?lid=400791';
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
